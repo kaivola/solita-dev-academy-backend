@@ -18,15 +18,15 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "station_name")
+    @Column(name = "station_name", length = 100)
     private String stationName;
 
-    @Column(name = "station_address")
+    @Column(name = "station_address", length = 100)
     private String stationAddress;
 
-    @Column(name = "coordinate_x")
+    @Column(name = "coordinate_x", length = 100)
     private String coordinateX;
 
-    @Column(name = "coordinate_y")
+    @Column(name = "coordinate_y", length = 100)
     private String coordinateY;
 }
