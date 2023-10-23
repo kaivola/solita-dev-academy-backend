@@ -16,4 +16,9 @@ public class StationService {
     public Page<Station> getStations(Integer page) {
         return stationRepository.findAll(PageRequest.of(page, 30));
     }
+
+    public Station getStationById(Long id) {
+        return stationRepository.findById(id).orElseThrow();
+    }
+
 }

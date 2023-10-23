@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,11 @@ public class StationController {
     public ResponseEntity<Page<Station>> getStations(@RequestParam Optional<Integer> page) {
         Page<Station> stations = stationService.getStations(page.orElse(0));
         return new ResponseEntity<>(stations, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/stations/{id}")
+    public ResponseEntity<Station> getStation(@PathVariable Long id) {
+        Station station = stationService.getStationById(id);
+        return new ResponseEntity<>(station, HttpStatus.OK);
     }
 }
