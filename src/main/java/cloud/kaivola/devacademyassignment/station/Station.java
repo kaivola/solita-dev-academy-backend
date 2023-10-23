@@ -1,6 +1,7 @@
 package cloud.kaivola.devacademyassignment.station;
 
 
+import cloud.kaivola.devacademyassignment.statistics.StationStatistics;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,4 +30,7 @@ public class Station {
 
     @Column(name = "coordinate_y", length = 100)
     private String coordinateY;
+
+    @Transient
+    private StationStatistics statistics;
 }
