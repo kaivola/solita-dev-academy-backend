@@ -57,6 +57,27 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>cz.habarta.typescript-generator</groupId>
+				<artifactId>typescript-generator-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<phase>install</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<jsonLibrary>jackson2</jsonLibrary>
+					<classes>
+						<class>cloud.kaivola.devacademyassignment.station.Station</class>
+						<class>org.springframework.data.domain.PageImpl</class>
+					</classes>
+					<outputKind>module</outputKind>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
