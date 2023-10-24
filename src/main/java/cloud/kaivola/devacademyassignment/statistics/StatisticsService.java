@@ -26,6 +26,6 @@ public class StatisticsService {
     }
 
     public Double calculateAverageDistance(List<Journey> journeys) {
-        return journeys.stream().collect(Collectors.averagingDouble(Journey::getDistance));
+        return journeys.stream().filter(journey -> journey.getDistance() != null).collect(Collectors.averagingDouble(Journey::getDistance));
     }
 }

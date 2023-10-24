@@ -34,4 +34,17 @@ public class StatisticsServiceTest {
         Double res = statisticsService.calculateAverageDistance(journeys);
         assertEquals(150.0, res);
     }
+
+    @Test
+    void shouldCalculateAverageDistancesWithMissingValues() {
+        Journey j1 = new Journey();
+        j1.setDistance(100);
+        Journey j2 = new Journey();
+        Journey j3 = new Journey();
+        j3.setDistance(200);
+        List<Journey> journeys = List.of(j1, j2, j3);
+
+        Double res = statisticsService.calculateAverageDistance(journeys);
+        assertEquals(150.0, res);
+    }
 }
