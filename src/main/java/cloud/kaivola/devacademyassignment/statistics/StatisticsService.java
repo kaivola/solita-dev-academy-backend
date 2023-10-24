@@ -5,6 +5,7 @@ import cloud.kaivola.devacademyassignment.journey.JourneyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StatisticsService {
@@ -24,4 +25,7 @@ public class StatisticsService {
         return statistics;
     }
 
+    public Double calculateAverageDistance(List<Journey> journeys) {
+        return journeys.stream().collect(Collectors.averagingDouble(Journey::getDistance));
+    }
 }
