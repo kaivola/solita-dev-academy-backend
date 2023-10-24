@@ -26,7 +26,7 @@ public class StationController {
     }
 
     @GetMapping(path = "/stations/{id}")
-    public ResponseEntity<Station> getStation(@PathVariable Long id) {
+    public ResponseEntity<Station> getStation(@PathVariable Integer id) {
         Station station = stationService.getStationById(id);
         return new ResponseEntity<>(station, HttpStatus.OK);
     }

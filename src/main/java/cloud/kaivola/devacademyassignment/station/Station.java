@@ -2,6 +2,7 @@ package cloud.kaivola.devacademyassignment.station;
 
 
 import cloud.kaivola.devacademyassignment.statistics.StationStatistics;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,5 +33,6 @@ public class Station {
     private String coordinateY;
 
     @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private StationStatistics statistics;
 }
