@@ -2,9 +2,9 @@ package cloud.kaivola.devacademyassignment.station;
 
 import cloud.kaivola.devacademyassignment.statistics.StationStatistics;
 import cloud.kaivola.devacademyassignment.statistics.StatisticsService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StationService {
@@ -17,8 +17,8 @@ public class StationService {
         this.statisticsService = statisticsService;
     }
 
-    public Page<Station> getStations(Integer page) {
-        return stationRepository.findAll(PageRequest.of(page, 30));
+    public List<Station> getStations() {
+        return stationRepository.findAll();
     }
 
     public Station getStationById(Integer id) {
