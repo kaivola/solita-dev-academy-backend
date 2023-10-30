@@ -18,7 +18,7 @@ public class StationService {
     }
 
     public List<Station> getStations() {
-        return stationRepository.findAll();
+        return stationRepository.findAllByOrderByStationNameAsc();
     }
 
     public Station getStationById(Integer id) {
