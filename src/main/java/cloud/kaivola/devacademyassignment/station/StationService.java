@@ -1,5 +1,6 @@
 package cloud.kaivola.devacademyassignment.station;
 
+import cloud.kaivola.devacademyassignment.exceptions.ResourceNotFoundException;
 import cloud.kaivola.devacademyassignment.statistics.StationStatistics;
 import cloud.kaivola.devacademyassignment.statistics.StatisticsService;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class StationService {
     }
 
     public Station getStationById(Integer id) {
-        Station station = stationRepository.findById(id).orElseThrow();
+        Station station = stationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Station with id: " + id + " not found"));
         StationStatistics statistics = statisticsService.getStationStatisticsById(station.getId());
         station.setStatistics(statistics);
         return station;
