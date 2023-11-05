@@ -5,6 +5,7 @@ import cloud.kaivola.devacademyassignment.statistics.StationStatistics;
 import cloud.kaivola.devacademyassignment.statistics.StatisticsService;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
@@ -22,10 +23,28 @@ public class StationService {
         return stationRepository.findAllByOrderByStationNameAsc();
     }
 
-    public Station getStationById(Integer id) {
+    public StationDto getStationById(Integer id) {
         Station station = stationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Station with id: " + id + " not found"));
         StationStatistics statistics = statisticsService.getStationStatisticsById(station.getId());
         station.setStatistics(statistics);
-        return station;
+        return mapStationToStationDto(station);
+    }
+
+    public StationDto mapStationToStationDto(Station station) {
+        DecimalFormat df = new DecimalFormat("#.0");
+        String avgDistance = df.format(station.getStatistics().getAverageDistanceOfJourneys());
+        Integer avgDuration = (int) Math.round(station.getStatistics().getAverageDurationOfJourneys());
+
+        return new StationDto(
+                station.getId(),
+                station.getStationName(),
+                station.getStationAddress(),
+                station.getCoordinateX(),
+                station.getCoordinateY(),
+                station.getStatistics().getNumOfJourneysStarting(),
+                station.getStatistics().getNumOfJourneysEnding(),
+                avgDistance,
+                avgDuration
+        );
     }
 }

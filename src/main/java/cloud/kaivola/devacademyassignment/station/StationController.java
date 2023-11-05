@@ -24,8 +24,8 @@ public class StationController {
     }
 
     @GetMapping(path = "/stations/{id}")
-    public ResponseEntity<Station> getStation(@PathVariable Integer id) {
-        Station station = stationService.getStationById(id);
+    public ResponseEntity<StationDto> getStation(@PathVariable Integer id) {
+        StationDto station = stationService.getStationById(id);
         return new ResponseEntity<>(station, HttpStatus.OK);
     }
 }

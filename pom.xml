@@ -73,7 +73,7 @@
 					<jsonLibrary>jackson2</jsonLibrary>
 					<classes>
 						<class>cloud.kaivola.devacademyassignment.station.Station</class>
-						<class>org.springframework.data.domain.PageImpl</class>
+                        <class>cloud.kaivola.devacademyassignment.station.StationDto</class>
 					</classes>
 					<outputKind>module</outputKind>
 				</configuration>
