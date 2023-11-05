@@ -4,15 +4,15 @@ package cloud.kaivola.devacademyassignment.station;
 import cloud.kaivola.devacademyassignment.statistics.StationStatistics;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @Table(name = "station")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Station {
 
     @Id
