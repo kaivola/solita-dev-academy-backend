@@ -5,8 +5,8 @@ import cloud.kaivola.devacademyassignment.statistics.StationStatistics;
 import cloud.kaivola.devacademyassignment.statistics.StatisticsService;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StationService {
@@ -19,32 +19,34 @@ public class StationService {
         this.statisticsService = statisticsService;
     }
 
-    public List<Station> getStations() {
-        return stationRepository.findAllByOrderByStationNameAsc();
+    public List<StationDto> getStations() {
+        List<Station> stations = stationRepository.findAllByOrderByStationNameAsc();
+        return stations.stream().map(this::mapStationToDto).collect(Collectors.toList());
     }
 
     public StationDto getStationById(Integer id) {
         Station station = stationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Station with id: " + id + " not found"));
         StationStatistics statistics = statisticsService.getStationStatisticsById(station.getId());
         station.setStatistics(statistics);
-        return mapStationToStationDto(station);
+        return mapStationToDto(station);
     }
 
-    public StationDto mapStationToStationDto(Station station) {
-        DecimalFormat df = new DecimalFormat("#.0");
-        String avgDistance = df.format(station.getStatistics().getAverageDistanceOfJourneys());
-        Integer avgDuration = (int) Math.round(station.getStatistics().getAverageDurationOfJourneys());
+    public StationDto mapStationToDto(Station station) {
+        StationDto stationDto = new StationDto();
 
-        return new StationDto(
-                station.getId(),
-                station.getStationName(),
-                station.getStationAddress(),
-                station.getCoordinateX(),
-                station.getCoordinateY(),
-                station.getStatistics().getNumOfJourneysStarting(),
-                station.getStatistics().getNumOfJourneysEnding(),
-                avgDistance,
-                avgDuration
-        );
+        stationDto.setId(station.getId());
+        stationDto.setName(station.getStationName());
+        stationDto.setAddress(station.getStationAddress());
+        stationDto.setCoordinateX(Double.parseDouble(station.getCoordinateX()));
+        stationDto.setCoordinateY(Double.parseDouble(station.getCoordinateY()));
+
+        if (station.getStatistics() != null) {
+            StationStatistics statistics = station.getStatistics();
+            stationDto.setNumOfJourneysStarting(statistics.getNumOfJourneysStarting());
+            stationDto.setNumOfJourneysEnding(statistics.getNumOfJourneysEnding());
+            stationDto.setAverageDistanceOfJourneys(statistics.getAverageDistanceOfJourneys());
+            stationDto.setAverageDurationOfJourneys((int) Math.round(statistics.getAverageDurationOfJourneys()));
+        }
+        return stationDto;
     }
 }

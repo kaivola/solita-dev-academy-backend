@@ -18,8 +18,8 @@ public class StationController {
     }
 
     @GetMapping(path = "/stations")
-    public ResponseEntity<List<Station>> getStations() {
-        List<Station> stations = stationService.getStations();
+    public ResponseEntity<List<StationDto>> getStations() {
+        List<StationDto> stations = stationService.getStations();
         return new ResponseEntity<>(stations, HttpStatus.OK);
     }
 
