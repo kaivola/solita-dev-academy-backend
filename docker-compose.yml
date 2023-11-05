@@ -2,6 +2,7 @@ version: "3"
 
 services:
   backend:
+    build: .
     container_name: dev-academy-backend
     image: dev-academy-backend
     environment:
