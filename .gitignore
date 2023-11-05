@@ -1,5 +1,4 @@
 .directory
-docker-compose.yml
 
 HELP.md
 target/

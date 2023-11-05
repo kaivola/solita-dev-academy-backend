@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  backend:
+    container_name: dev-academy-backend
+    image: dev-academy-backend
+    environment:
+      - DB_USER=academy
+      - DB_PASSWORD=academy
+      - DB_HOST=localhost
+    network_mode: host
+    restart: unless-stopped
