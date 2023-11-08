@@ -25,7 +25,7 @@ public class StationServiceTest {
 
     @Test
     void shouldFormatDistanceAndDurationCorrectly() {
-        StationStatistics statistics1 = new StationStatistics(10, 50, 150.9, 1.0001000);
+        StationStatistics statistics1 = new StationStatistics(10, 50, 150.9, 1.0001000, null);
         Station s1 = new Station(1, "Station 1", "Address 1", "0.0", "0.0", statistics1);
 
         StationDto dto1 = stationService.mapStationToDto(s1);
@@ -44,7 +44,7 @@ public class StationServiceTest {
 
     @Test
     void shouldMapStationToDto() {
-        StationStatistics statistics1 = new StationStatistics(10, 50, 150.9, 1.0001000);
+        StationStatistics statistics1 = new StationStatistics(10, 50, 150.9, 1.0001000, null);
         Station s1 = new Station(1, "Station 1", "Address 1", "0.0", "0.0", statistics1);
         StationDto dto1 = stationService.mapStationToDto(s1);
         assertEquals(s1.getId(), dto1.getId());
