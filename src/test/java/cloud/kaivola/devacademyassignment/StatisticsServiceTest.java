@@ -6,10 +6,12 @@ import cloud.kaivola.devacademyassignment.statistics.StatisticsService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import static org.mockito.Mockito.mock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class StatisticsServiceTest {
 
@@ -73,5 +75,27 @@ public class StatisticsServiceTest {
 
         Double res = statisticsService.calculateAverageDuration(journeys);
         assertEquals(150.0, res);
+    }
+
+    @Test
+    void shouldGetTopDestinations() {
+        List<Journey> journeys = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Journey j1 = new Journey();
+            j1.setId(i);
+            if (i < 2) {
+                j1.setReturnStationId(1);
+            } else if (i < 6) {
+                j1.setReturnStationId(2);
+            } else {
+                j1.setReturnStationId(i);
+            }
+            journeys.add(j1);
+        }
+        Map<Integer, Long> res = statisticsService.getTopDestinationIds(journeys);
+
+        assertEquals(res.size(), 5);
+        assertEquals(res.get(1), 2);
+        assertEquals(res.get(2), 4);
     }
 }
