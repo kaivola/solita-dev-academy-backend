@@ -31,6 +31,11 @@ public class StationService {
         return mapStationToDto(station);
     }
 
+    public List<StationDto> getStationsByIds(Set<Integer> ids) {
+        List<Station> stations = stationRepository.findAllById(ids);
+        return stations.stream().map(this::mapStationToDto).collect(Collectors.toList());
+    }
+
     public StationDto mapStationToDto(Station station) {
         StationDto stationDto = new StationDto();
 
