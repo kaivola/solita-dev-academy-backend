@@ -6,6 +6,8 @@ import cloud.kaivola.devacademyassignment.statistics.StatisticsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,7 +53,19 @@ public class StationService {
             stationDto.setNumOfJourneysEnding(statistics.getNumOfJourneysEnding());
             stationDto.setAverageDistanceOfJourneys(statistics.getAverageDistanceOfJourneys());
             stationDto.setAverageDurationOfJourneys((int) Math.round(statistics.getAverageDurationOfJourneys()));
+            if (statistics.getTopDestinationIds() != null) {
+                stationDto.setTopDestinations(getTopDestinations(statistics));
+            }
         }
         return stationDto;
+    }
+
+    private List<TopDestinationPair> getTopDestinations(StationStatistics statistics) {
+        Map<Integer, Long> topDestinations = statistics.getTopDestinationIds();
+        List<StationDto> topDestinationStations = getStationsByIds(topDestinations.keySet());
+        return topDestinationStations
+                .stream()
+                .map(station -> new TopDestinationPair(station, topDestinations.get(station.getId()).intValue()))
+                .toList();
     }
 }

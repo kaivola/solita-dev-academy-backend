@@ -3,6 +3,8 @@ package cloud.kaivola.devacademyassignment.station;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,4 +20,5 @@ public class StationDto {
         Integer numOfJourneysEnding;
         Double averageDistanceOfJourneys;
         Integer averageDurationOfJourneys;
+        List<TopDestinationPair> topDestinations;
 }
